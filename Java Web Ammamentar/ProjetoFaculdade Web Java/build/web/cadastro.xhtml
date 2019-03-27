@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate 
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    template="template.xhtml" 
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:form>
+
+        <p:menubar>
+            
+        
+            <p:menuitem value="Cadastro de Dados" url="cadastro.xhtml"></p:menuitem>
+            <p:menuitem value="Endereço" url="endereco.xhtml"></p:menuitem>
+                   
+        </p:menubar>
+        
+        
+        <p:messages autoUpdate="true" showDetail="true"></p:messages>
+        <p:fieldset legend="Cadastro">
+            <p:panelGrid columns="2">
+               
+                <h:outputLabel for="nome" value="Nome(completo)"></h:outputLabel>
+                <p:inputText id="nome" value="#{pessoaBean.pessoa.nome}" ></p:inputText>
+
+                <h:outputLabel for="cpf" value="CPF"></h:outputLabel>
+                <p:inputMask  mask="999.999.999-99" id="cpf" value="#{pessoaBean.pessoa.cpf}" ></p:inputMask>
+
+                <h:outputLabel for="rg" value="RG"></h:outputLabel>
+                <p:inputMask mask="99.999.999-99" id="rg" value="#{pessoaBean.pessoa.rg}" ></p:inputMask>
+
+                <h:outputLabel for="telefone" value="Telefone"></h:outputLabel>
+                <p:inputMask mask="(99)9 9999-9999" id="telefone" value="#{pessoaBean.pessoa.telefone}" ></p:inputMask>
+
+                <h:outputLabel for="email" value="Email"></h:outputLabel>
+                <p:inputText id="email" value="#{pessoaBean.pessoa.email}" ></p:inputText>
+
+                <h:outputLabel for="senha" value="Senha"></h:outputLabel>
+                <p:password id="senha" value="#{pessoaBean.pessoa.senha}"></p:password>
+
+
+            </p:panelGrid>
+
+            <p:toolbar>
+            <p:toolbarGroup>
+                <p:commandButton value="Salvar" action="#{pessoaBean.adicionar()}" update="@form" ></p:commandButton>
+                <p:commandButton value="Listar" action="#{pessoaBean.listar()}" update="@form"></p:commandButton>
+
+            </p:toolbarGroup>
+        </p:toolbar>
+            
+            <p:dataTable value="#{pessoaBean.pessoas}" var="pessoa">
+                <p:column>
+                    <p:commandButton value="Editar" action="#{pessoaBean.editar(pessoa)}" update="@form"></p:commandButton>
+                    <p:commandButton value="Deletar" action="#{pessoaBean.deletar(pessoa)}" update="@form"></p:commandButton>
+                </p:column>
+
+                <p:column headerText="NOME" sortBy="#{pessoa.nome}">
+                    <h:outputText value="#{pessoa.nome}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="CPF" sortBy="#{pessoa.cpf}">
+                    <h:outputText value="#{pessoa.cpf}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="RG" sortBy="#{pessoa.rg}">
+                    <h:outputText value="#{pessoa.rg}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="TELEFONE" sortBy="#{pessoa.telefone}">
+                    <h:outputText value="#{pessoa.telefone}"></h:outputText>
+                </p:column>
+                
+                <p:column headerText="EMAIL" sortBy="#{pessoa.email}">
+                    <h:outputText value="#{pessoa.email}" ></h:outputText>
+                </p:column>
+
+                <p:column headerText="SENHA" sortBy="#{pessoa.senha}">
+                    <p:outputLabel value="**********"> </p:outputLabel>
+                </p:column>
+
+
+
+        </p:dataTable>
+        </p:fieldset>
+    </h:form>     
+</ui:decorate>
+
